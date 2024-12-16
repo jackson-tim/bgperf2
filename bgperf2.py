@@ -112,7 +112,7 @@ def prepare(args):
     GoBGP.build_image(args.force, nocache=args.no_cache)
     BIRD.build_image(args.force, nocache=args.no_cache)
     FRRouting.build_image(args.force,  nocache=args.no_cache)
-    RustyBGP.build_image(args.force, nocache=args.no_cache)
+#    RustyBGP.build_image(args.force, nocache=args.no_cache)
     OpenBGP.build_image(args.force, nocache=args.no_cache)
     FRRoutingCompiled.build_image(args.force, nocache=args.no_cache)
     Bgpdump2.build_image(args.force, nocache=args.no_cache)
@@ -463,6 +463,9 @@ def bench(args):
     if target_class == EosTarget:
         print("Waiting extra 10 seconds for EOS ")
         time.sleep(10)
+    elif target_class == JunosTarget:
+        print("Waiting extra 5 seconds for Junos ")
+        time.sleep(5)
 
     start = datetime.datetime.now()
 
@@ -484,8 +487,8 @@ def bench(args):
         if i > 0:
             rm_line()
         print(f"launched {i+1} testers")
-        # if args.prefix_num >= 100_000:
-        #     time.sleep(1)
+#        if args.prefix_num >= 100_000:
+#            time.sleep(1)
 
     f = open(args.output, 'w') if args.output else None
     cpu = 0
